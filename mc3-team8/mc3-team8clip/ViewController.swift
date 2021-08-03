@@ -91,12 +91,38 @@ class ViewController: UIViewController {
             return
         }
         
-        showAlert(title: "Success \(String(describing: transactionId))", message: "Voucher akan dikirim ke email anda!")
+        let airTableId: String = self.transactionId
+        
+        TransactionModel.updateReviewInsert(airtableid: airTableId,
+                                            review: kritikTextField.text!,
+                                            ratingPrice: priceRate,
+                                            ratingService: serviceRate,
+                                            ratingProduct: productRate)
+        { [self] isSuccess in
+            if isSuccess{
+                showSuccessAlert(title: "Success", message: "Voucher akan dikirim ke email anda!"){
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewController(identifier: "succ")
+                    self.present(vc, animated: true)
+                }
+            }else{
+                showAlert(title: "Unknown Error!", message: "Silahkan dicoba lagi!")
+            }
+        }
+        
     }
     
     func showAlert(title: String, message: String){
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(ac, animated: true)
+    }
+    
+    func showSuccessAlert(title: String, message: String, callback: @escaping (()->Void) = {}){
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Done", style: .default){ _ in
+            callback()
+        })
         self.present(ac, animated: true)
     }
 }
