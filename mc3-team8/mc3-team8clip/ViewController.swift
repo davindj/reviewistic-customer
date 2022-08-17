@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         let rating = btnList.firstIndex(of: sender)! + 1
         
         if ratingType == .price{
-            priceRate = rating
+            priceRate = rating  
         }else if ratingType == .product{
             productRate = rating
         }else if ratingType == .service{
