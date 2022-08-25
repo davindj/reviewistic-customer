@@ -40,7 +40,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func priceBtnTapped(_ sender: UIButton) {
@@ -82,12 +81,12 @@ class ViewController: UIViewController {
         let isKritikValid = !kritikTextField.text!.isEmpty
         
         if !isRateValid{
-            showAlert(title: "Rating ada yang kosong!", message: "Tolong isi semua rating terlebih dahulu")
+            showAlert(title: "Empty rating!", message: "Please give a rating to each category")
             return
         }
         
         if !isKritikValid{
-            showAlert(title: "Kritik dan Saran kosong!", message: "Tolong isi kritik dan saran terlebih dahulu")
+            showAlert(title: "Empty feedback!", message: "Please fill feedback section")
             return
         }
         
@@ -100,13 +99,13 @@ class ViewController: UIViewController {
                                             ratingProduct: productRate)
         { [self] isSuccess in
             if isSuccess{
-                showSuccessAlert(title: "Success", message: "Voucher akan dikirim ke email anda!"){
+                showSuccessAlert(title: "Success", message: "Voucher will be sent to your email!"){
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = storyboard.instantiateViewController(identifier: "succ")
                     self.present(vc, animated: true)
                 }
             }else{
-                showAlert(title: "Unknown Error!", message: "Silahkan dicoba lagi!")
+                showAlert(title: "Unknown Error!", message: "Please try again!")
             }
         }
         
