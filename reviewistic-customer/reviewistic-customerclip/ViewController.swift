@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         
         let airTableId: String = self.transactionId
         
-        TransactionModel.updateReviewInsert(airtableid: airTableId,
+        TransactionModel.updateReviewInsert(transactionId: airTableId,
                                             review: kritikTextField.text!,
                                             ratingPrice: priceRate,
                                             ratingService: serviceRate,

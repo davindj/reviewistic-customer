@@ -8,7 +8,14 @@
 import Foundation
 
 class TransactionModel {
-    static func updateReviewInsert(airtableid:String,
+    static var AIRTABLE_URL: String { // ex: https://api.airtable.com/v0/jassDK12DDsda
+        ProcessInfo.processInfo.environment["AIRTABLE_URL"]!
+    }
+    static var AIRTABLE_API_KEY: String { // ex: keys7A1poLWvQm10A
+        ProcessInfo.processInfo.environment["AIRTABLE_API_KEY"]!
+    }
+    
+    static func updateReviewInsert(transactionId:String,
                                    review:String,
                                    ratingPrice:Int,
                                    ratingService:Int,
@@ -27,7 +34,8 @@ class TransactionModel {
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
 
         // create post request
-        let url = URL(string: "https://api.airtable.com/v0/appP7dMHeW4puOorW/Review/"+airtableid+"?api_key=keys9Q3knWNrVr89B")!
+        let urlString = "\(AIRTABLE_URL)/Transaksi/\(transactionId)?api_key=\(AIRTABLE_API_KEY)"
+        let url = URL(string: urlString)!
         
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
